@@ -1,6 +1,6 @@
 # COngDING(Capstone design 2021-1)
 
-- Su yeon Lee (2017****46)
+- Lee Su Yeon (2017****46)
 - Yun Seo Young (2017****40)
 - Jeong So Yun (2017****53)
 
