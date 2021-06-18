@@ -13,7 +13,9 @@
 | Contents | March | April |  May  | June  |   Progress   |
 |----------|-------|-------|-------|-------|--------------|
 |   기획   |   ㅇ    |       |       |       |     Link1    |
-| 리소스 제작 |   ㅇ    |   ㅇ    |   ㅇ    |       |     Link2    |
+| 리소스 제작(이미지, 애니메이션 등) |   ㅇ   |   ㅇ    |   ㅇ    |       |     Link2    |
+| 스토리 작성 |       |   ㅇ    |       |       |     Link3    |
+| 프로그래밍 |       |       |   ㅇ   |   ㅇ   |     Link4    |
 
 ## Results
 * Main code, table, graph, comparison, ...
