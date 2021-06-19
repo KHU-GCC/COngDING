@@ -1,3 +1,10 @@
+//
+//  Go_nextpage.cs
+//  Congding
+//
+//  Created by Yun Seo Young on 2021/06/18.
+//  Copyright (c) 2021 Will KHU-GCC. All rights reserved.
+//
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
