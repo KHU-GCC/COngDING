@@ -38,5 +38,5 @@
 
 ## Reports
 * Upload or link (e.g. Google Drive files with share setting)
-* Midterm: https://drive.google.com/file/d/1xJECdHaHg1X3V8zJXA6cJ9qBiGVVsgKp/view?usp=sharing
+* Midterm: [Midterm](Reports/Midterm.pdf)
 * Final: [Report](Reports/Final.pdf), [Demo video](Reports/Demo.mp4)
