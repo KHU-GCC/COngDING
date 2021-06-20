@@ -9,7 +9,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using UnityEngine.SceneManagement;
 
 // CongdingController는 플레이어 캐릭터로서 Congding 게임 오브젝트를 제어함.
 public class CongdingController : MonoBehaviour
@@ -429,6 +429,7 @@ public class CongdingController : MonoBehaviour
             //로그 확인
             Debug.Log("Star item");
         }
+
         else if (other.tag == "Diamond")
         {
             //다이아 아이템을 먹었을 시
@@ -448,6 +449,10 @@ public class CongdingController : MonoBehaviour
             //로그 확인
             Debug.Log("Diamond item");
         }
+        else if(other.tag == "teleport")
+        {
+            GameManager.instance.ChangeScene();
+        }
         else if(other.tag == "Talk")
         {
             // 대사창을 띄워야하는 지점이 도달했을 시.
@@ -455,6 +460,7 @@ public class CongdingController : MonoBehaviour
             GameManager.instance.onTalk = true;
             GameManager.instance.GetTalk(other.name);
         }
+        
     }
 
     private void OnCollisionEnter2D(Collision2D collision)

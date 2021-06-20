@@ -52,14 +52,14 @@ public class GameManager : MonoBehaviour
 
     public Sprite dashg; // 대쉬게이지 스프라이트
     public Sprite emptyDashg; // 비어있는 대쉬게이지 스프라이트
-    
-    
+
+
 
     // 게임 시작과 동시에 싱글턴을 구성
     void Awake()
     {
         // 싱글턴 변수 instance가 비어 있는가?
-        if(instance == null)
+        if (instance == null)
         {
             // instance가 비어 있다면(null)  그곳에 자기 자신을 할당
             instance = this;
@@ -82,7 +82,7 @@ public class GameManager : MonoBehaviour
 
         // talkUI의 자식중 이름이 Text인 게임 오브젝트의 Text컴포넌트의 text
         // talkText = talkUI.transform.Find("Text").gameObject.GetComponent<Text>().text;
-        
+
     }
 
     void Update()
@@ -111,11 +111,11 @@ public class GameManager : MonoBehaviour
     // 점수를 증가시키는 메서드
     public void AddScore(int newScore)
     {
-        if(!isGameover)
+        if (!isGameover)
         {
             // 점수를 증가
             score += newScore;
-            if(score >= 0)
+            if (score >= 0)
             {
                 scoreText.text = "Score : " + score;
             }
@@ -129,37 +129,37 @@ public class GameManager : MonoBehaviour
     // 하트(life)UI를 관리하는 코드
     public void HeartControl()
     {
-        if(life == 6)
+        if (life == 6)
         {
             heart1.GetComponent<SpriteRenderer>().sprite = full_heart;
             heart2.GetComponent<SpriteRenderer>().sprite = full_heart;
             heart3.GetComponent<SpriteRenderer>().sprite = full_heart;
         }
-        else if(life == 5)
+        else if (life == 5)
         {
             heart1.GetComponent<SpriteRenderer>().sprite = full_heart;
             heart2.GetComponent<SpriteRenderer>().sprite = full_heart;
             heart3.GetComponent<SpriteRenderer>().sprite = half_heart;
         }
-        else if(life == 4)
+        else if (life == 4)
         {
             heart1.GetComponent<SpriteRenderer>().sprite = full_heart;
             heart2.GetComponent<SpriteRenderer>().sprite = full_heart;
             heart3.GetComponent<SpriteRenderer>().sprite = empty_heart;
         }
-        else if(life == 3)
+        else if (life == 3)
         {
             heart1.GetComponent<SpriteRenderer>().sprite = full_heart;
             heart2.GetComponent<SpriteRenderer>().sprite = half_heart;
             heart3.GetComponent<SpriteRenderer>().sprite = empty_heart;
         }
-        else if(life == 2)
+        else if (life == 2)
         {
             heart1.GetComponent<SpriteRenderer>().sprite = full_heart;
             heart2.GetComponent<SpriteRenderer>().sprite = empty_heart;
             heart3.GetComponent<SpriteRenderer>().sprite = empty_heart;
         }
-        else if(life == 1)
+        else if (life == 1)
         {
             heart1.GetComponent<SpriteRenderer>().sprite = half_heart;
             heart2.GetComponent<SpriteRenderer>().sprite = empty_heart;
@@ -175,7 +175,7 @@ public class GameManager : MonoBehaviour
 
     public void DashControl()
     {
-        if(dash == 5)
+        if (dash == 5)
         {
             dash1.GetComponent<SpriteRenderer>().sprite = dashg;
             dash2.GetComponent<SpriteRenderer>().sprite = dashg;
@@ -183,7 +183,7 @@ public class GameManager : MonoBehaviour
             dash4.GetComponent<SpriteRenderer>().sprite = dashg;
             dash5.GetComponent<SpriteRenderer>().sprite = dashg;
         }
-        else if(dash == 4)
+        else if (dash == 4)
         {
             dash1.GetComponent<SpriteRenderer>().sprite = dashg;
             dash2.GetComponent<SpriteRenderer>().sprite = dashg;
@@ -191,7 +191,7 @@ public class GameManager : MonoBehaviour
             dash4.GetComponent<SpriteRenderer>().sprite = dashg;
             dash5.GetComponent<SpriteRenderer>().sprite = emptyDashg;
         }
-        else if(dash == 3)
+        else if (dash == 3)
         {
             dash1.GetComponent<SpriteRenderer>().sprite = dashg;
             dash2.GetComponent<SpriteRenderer>().sprite = dashg;
@@ -199,7 +199,7 @@ public class GameManager : MonoBehaviour
             dash4.GetComponent<SpriteRenderer>().sprite = emptyDashg;
             dash5.GetComponent<SpriteRenderer>().sprite = emptyDashg;
         }
-        else if(dash == 2)
+        else if (dash == 2)
         {
             dash1.GetComponent<SpriteRenderer>().sprite = dashg;
             dash2.GetComponent<SpriteRenderer>().sprite = dashg;
@@ -207,7 +207,7 @@ public class GameManager : MonoBehaviour
             dash4.GetComponent<SpriteRenderer>().sprite = emptyDashg;
             dash5.GetComponent<SpriteRenderer>().sprite = emptyDashg;
         }
-        else if(dash == 1)
+        else if (dash == 1)
         {
             dash1.GetComponent<SpriteRenderer>().sprite = dashg;
             dash2.GetComponent<SpriteRenderer>().sprite = emptyDashg;
@@ -231,39 +231,23 @@ public class GameManager : MonoBehaviour
     {
         talkTag = talkName;
 
-        if(talkManager.GetComponent<TalkManager>().GetTalk(talkName, talkIndex) != null)
+        if (talkManager.GetComponent<TalkManager>().GetTalk(talkName, talkIndex) != null)
         {
-            talkString = talkManager.GetComponent<TalkManager>().GetTalk(talkName, talkIndex);
-        }
-        else
-        {
-            onTalk = false;
-        }
-    }
-
-    public void Talking(string talk)
-    {
-        if(onTalk)
-        {
-            // 게임 일시정지
-            isPause = true;
+            talkUI.SetActive(true);
 
             // 대화상태 온
             onTalk = true;
 
-            talkUI.SetActive(true);
+            // 게임 일시정지
+            isPause = true;
 
-            talkText.text = talkString;
-            if(Input.GetMouseButtonDown(0))
-            {
-                talkIndex++;
-                // 나중에 고치기
-                GetTalk(talk);
-            }
-
+            talkString = talkManager.GetComponent<TalkManager>().GetTalk(talkName, talkIndex);
         }
         else
         {
+            //대화 종료
+            onTalk = false;
+
             // 일시정지 종료
             isPause = false;
 
@@ -272,6 +256,20 @@ public class GameManager : MonoBehaviour
 
             //talkIndex 초기화
             talkIndex = 0;
+        }
+    }
+
+    public void Talking(string talk)
+    {
+        if (onTalk)
+        {
+            talkText.text = talkString;
+            if (Input.GetMouseButtonDown(0))
+            {
+                talkIndex++;
+                // 나중에 고치기
+                GetTalk(talk);
+            }
         }
     }
 
@@ -291,24 +289,31 @@ public class GameManager : MonoBehaviour
 
     public void OnPause()
     {
-        if(!isPause)
+        if (!onTalk)
         {
-            isPause = true;
+            if (!isPause)
+            {
+                isPause = true;
 
-            Debug.Log("Pause");
+                Debug.Log("Pause");
 
-            // 일시정지 창 활성화
-            pauseUI.SetActive(true);
+                // 일시정지 창 활성화
+                pauseUI.SetActive(true);
 
+            }
+            else if (isPause)
+            {
+                isPause = false;
+
+                Debug.Log("Continue");
+
+                // 일시정지 창 비활성화
+                pauseUI.SetActive(false);
+            }
         }
-        else
-        {
-            isPause = false;
-
-            Debug.Log("Continue");
-
-            // 일시정지 창 비활성화
-            pauseUI.SetActive(false);
-        }
-    }   
+    }
+    public void ChangeScene()
+    {
+        SceneManager.LoadScene("Bossstage");
+    }
 }
