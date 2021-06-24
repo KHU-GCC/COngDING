@@ -39,4 +39,4 @@
 ## Reports
 * Upload or link (e.g. Google Drive files with share setting)
 * Midterm: [Midterm](Reports/Midterm.pdf)
-* Final: [Report](Reports/Final.pdf), [Demo video](Reports/Demo.mp4)
+* Final: [Report](Reports/Final.pdf), [Demo video](https://youtu.be/D6vQ1EjR3bw)
