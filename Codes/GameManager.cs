@@ -22,6 +22,7 @@ public class GameManager : MonoBehaviour
     public GameObject talkUI; // 대화창 UI 게임 오브젝트
     public Text talkText; // 대화창의 대사를 나타낼 Text오브젝트
     public string talkTag; // 어느 대사를 나타낼 것인가 구분짓는 태그
+    public static string talkLog; // 대화를 어디까지 봤는지 체크하는 value, 게임이 재시작되도 기억하도록하여 해당판을 restart했을 때 같은 대화를 또 보는 것을 방지한다.
     public GameObject gameoverUI; // 게임오버 시 활성화할 UI 게임 오브젝트
     public GameObject pauseUI; // 일시정지 시 활성화할 UI 게임 오브젝트
     public int score = 0; // 게임 점수
@@ -225,37 +226,45 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    //대사창 띄우기.
+    // 대사창 띄우기.
     // 콩딩이가 충돌한 Talk collider오브젝트의 이름을 받는다.
+    // 나중에 talkManager의 key를 string에서 int로 바꾸면 그때는 talkTag != talkLog 코드를 숫자 비교로 바꾼다.
+    // 지금은 대화가 하나밖에 없으니까 되는 코드.
     public void GetTalk(string talkName)
     {
         talkTag = talkName;
 
-        if (talkManager.GetComponent<TalkManager>().GetTalk(talkName, talkIndex) != null)
+        if (talkTag != talkLog)
         {
-            talkUI.SetActive(true);
+            if (talkManager.GetComponent<TalkManager>().GetTalk(talkName, talkIndex) != null)
+            {
+                talkUI.SetActive(true);
 
-            // 대화상태 온
-            onTalk = true;
+                // 대화상태 온
+                onTalk = true;
 
-            // 게임 일시정지
-            isPause = true;
+                // 게임 일시정지
+                isPause = true;
 
-            talkString = talkManager.GetComponent<TalkManager>().GetTalk(talkName, talkIndex);
-        }
-        else
-        {
-            //대화 종료
-            onTalk = false;
+                talkString = talkManager.GetComponent<TalkManager>().GetTalk(talkName, talkIndex);
+            }
+            else
+            {
+                //대화 종료
+                onTalk = false;
 
-            // 일시정지 종료
-            isPause = false;
+                // 일시정지 종료
+                isPause = false;
 
-            // 대화창 닫기
-            talkUI.SetActive(false);
+                // 대화창 닫기
+                talkUI.SetActive(false);
 
-            //talkIndex 초기화
-            talkIndex = 0;
+                // 현재 대사까지 봤다고 기록
+                talkLog = talkTag;
+
+                //talkIndex 초기화
+                talkIndex = 0;
+            }
         }
     }
 
@@ -267,6 +276,7 @@ public class GameManager : MonoBehaviour
             if (Input.GetMouseButtonDown(0))
             {
                 talkIndex++;
+
                 // 나중에 고치기
                 GetTalk(talk);
             }
